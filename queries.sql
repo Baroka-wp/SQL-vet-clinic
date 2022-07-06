@@ -135,7 +135,8 @@ WHERE full_name = 'Melody Pond';
 SELECT animals.name as animals,
     species.name as species
 FROM animals
-    JOIN species ON animals.species_id = species.id;
+    JOIN species ON animals.species_id = species.id
+WHERE species.name = 'Pokemon';
 -- List all owners and their animals, remember to include those that don't own any animal.
 SELECT name AS Animals,
     full_name AS Owners
