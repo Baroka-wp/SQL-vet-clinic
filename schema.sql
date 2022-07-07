@@ -34,3 +34,27 @@ ALTER TABLE animals
 ADD owner_id INT;
 ALTER TABLE animals
 ADD CONSTRAINT fk_owner_table FOREIGN KEY(owner_id) REFERENCES owners(id);
+-- Create a table named vets with the following columns:
+CREATE TABLE vets(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name VARCHAR(50),
+  age INT,
+  date_of_graduation DATE
+);
+-- Create a "join table" called specializations to handle this relationship.
+CREATE TABLE specializations(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  species_id INT,
+  vets_id INT,
+  CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id),
+  CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id)
+);
+-- Create a "join table" called visits to handle this relationship, it should also keep track of the date of the visit.
+CREATE TABLE visits(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  animals_id INT,
+  vets_id INT,
+  date_of_visit DATE,
+  CONSTRAINT fk_visit_animals FOREIGN KEY(animals_id) REFERENCES animals(id),
+  CONSTRAINT fk_visits_vet FOREIGN KEY(vets_id) REFERENCES vets(id)
+)
